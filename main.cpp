@@ -7,12 +7,23 @@ using namespace std;
 fstream archivo;
 
 void leerArchivo(){
-    archivo.open();
-    string linea;
+    archivo.open("terminales.txt",ios::in);//leer archivo
+    if(archivo.is_open()){
+        string linea;
+        while(getline(archivo,linea)){
+            cout<<linea<<endl;
+        }
+        archivo.close();
+    }
+    else{
+        cout<<"Error en leer el archivo...";
+    }
+    
 
 }
 
 int main(){
+    leerArchivo();
     system("pause");
     return 0 ;
 }
