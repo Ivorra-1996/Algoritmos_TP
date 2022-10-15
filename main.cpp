@@ -7,7 +7,7 @@ using namespace std;
 fstream archivo;
 
 void leerArchivo(){
-    archivo.open("terminales.txt",ios::in);//leer archivo
+    archivo.open("terminales.txt",ios::in);//importamos y leemos el archivo
     if(archivo.is_open()){
         string linea;
         while(getline(archivo,linea)){
