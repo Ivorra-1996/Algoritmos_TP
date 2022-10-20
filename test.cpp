@@ -41,7 +41,7 @@ void menu(){
                 altas();
             break;
             case 2:
-                //bajas();
+                bajas();
             break;
             case 3:
                 //consultas();
@@ -105,6 +105,45 @@ void altas(){
 
 
 void bajas(){
+    ofstream archivoAux;
+    ifstream lectura;
+    string elecccion  = " ";
+    encontrado = false;
+    string auxClave = " ";
+    archivoAux.open("Auxterminales.txt",ios::out);
+    lectura.open("terminales.txt",ios::in);
+    if(archivoAux.is_open() && lectura.is_open()){
+        cout<<"Ingresa la clave de la terminal a dar de baja: ";
+        cin>>auxClave;
+        lectura>>clave;
+        while (!lectura.eof())
+        {
+            lectura>>nombreDeCiudad>>pais>>superficie>>cantidad_terminales>>destinos_nacionales>>destinos_internacionales;
+            if(auxClave == clave){
+                encontrado = true;
+                cout<<"____________________________________________________"<<endl;
+                cout<<clave<<" "<<nombreDeCiudad<<" "<<pais<<" "<<superficie<<" "<<cantidad_terminales<<" "<<destinos_nacionales<<" "
+                <<destinos_internacionales<<endl;
+                cout<<"____________________________________________________"<<endl;
+                
+            }else{
+                archivoAux<<clave<<" "<<nombreDeCiudad<<" "<<pais<<" "<<superficie<<" "<<cantidad_terminales<<" "<<destinos_nacionales<<" "
+                <<destinos_internacionales<<endl;
+            }
+            lectura>>clave;
+        }
+        
+    }else{
+        cout<<"No se puedo abrir el archivo. Verifique que haya sido creado o no este dañado."<<endl;
+    }
+    if (encontrado == false)
+    {
+        cout<<"No se encontro ninguna terminal con esa clave"<<endl;
+    }
+    archivoAux.close();
+    lectura.close();
+    remove("terminales.txt");
+    rename("Auxterminales.txt","terminales.txt");
 }
 
 void buscar(){
