@@ -4,14 +4,6 @@
 #include<string.h>
 using namespace std;
 
-//Funciones...
-void altas();
-
-
-
-
-void salir();
-void menu();
 //Variables Globales
 string clave = " ",nombreDeCiudad = " ",pais = " ",auxClave = " ";
 float superficie = 0.0;
@@ -80,6 +72,38 @@ void leerArchivo(){
     }
 }
 
+void buscar(){
+    ifstream lectura;//Creamos la variable de tipo lectura
+    lectura.open("terminales.txt",ios::out|ios::in);//Abrimos el archivo
+    //validando la apertura del archivo
+    bool encontrado = false;
+    cout<<"Entro a buscar"<<endl;
+    if(lectura.is_open()){
+        cout<<"Ingresa la Clave de la terminal que deseas Buscar: ";
+        cin>>auxClave;
+        lectura>>clave;//lectura adelantada
+
+        while(!lectura.eof()){
+            lectura>>nombreDeCiudad>>pais>>superficie>>cantidad_terminales>>destinos_nacionales>>destinos_internacionales;//leyendo los campos del registro
+            //Comparar cada registro para ver si es encontrado
+            if(auxClave==clave){
+                cout<<"____________________________________________________"<<endl;
+                cout<<clave<<" "<<nombreDeCiudad<<" "<<pais<<" "<<superficie<<" "<<cantidad_terminales<<" "<<destinos_nacionales<<" "
+                <<destinos_internacionales<<endl;
+                cout<<"_____________________________________________________"<<endl;
+                encontrado=true;
+            }
+            lectura>>clave;//lectura adelantada, sigue consultado las siguientes claves.
+        }
+        if(encontrado==false){
+            cout<<"No hay registros con la Clave "<<auxClave<<endl;
+        }
+    }else{
+        cout<<"No se pudoAbrir el Archivo, aun no ha sido Creado"<<endl;
+    }
+    //cerrando el archivo
+    lectura.close();
+}
 
 
 void salir(){
@@ -109,7 +133,7 @@ void menu(){
                 leerArchivo();
             break;
             case 4:
-                //buscar();
+                buscar();
             break;
             case 5:
                 //modificaciones();

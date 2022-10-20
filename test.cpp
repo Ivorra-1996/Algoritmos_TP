@@ -47,7 +47,8 @@ void menu(){
                 //consultas();
             break;
             case 4:
-                //buscar();
+                buscar();
+                cout<<"entro al menu opcion 4"<<endl;
             break;
             case 5:
                 modificaciones();
@@ -104,17 +105,17 @@ void altas(){
     consulta.close();
 }//Fin funcion altas de terminales......
 
-
+// NO ANDA LA FUNCION CONSULTAS!!.
 /*
 void consultas(){
     ifstream lectura;
-    lectura.open("terminales.txt",ios::out|ios::in);
+    lectura.open("terminales.txt",ios::in);
     if(lectura.is_open()){
         cout<<"Registros del Archivo terminales.txt"<<endl;
         cout<<"________________________________"<<endl;
         lectura>>clave;
         while(!lectura.eof()){
-            clave>>nombreDeCiudad>>pais>>superficie>>cantidad_terminales>>destinos_nacionales>>destinos_internacionales;
+            lectura>>nombreDeCiudad>>pais>>superficie>>cantidad_terminales>>destinos_nacionales>>destinos_internacionales;
             cout<<clave<<nombreDeCiudad<<pais<<superficie<<cantidad_terminales<<destinos_nacionales<<destinos_internacionales<<endl;
             lectura>>clave;
             cout<<"________________________________"<<endl;
@@ -125,34 +126,32 @@ void consultas(){
     lectura.close();
 }//Fin funcion consultas
 */
-/*
+
 void bajas(){
 }
+
 void buscar(){
     ifstream lectura;//Creamos la variable de tipo lectura
     lectura.open("terminales.txt",ios::out|ios::in);//Abrimos el archivo
     //validando la apertura del archivo
-    encontrado=false;
+    bool encontrado = false;
+    cout<<"Entro a buscar"<<endl;
     if(lectura.is_open()){
         cout<<"Ingresa la Clave de la terminal que deseas Buscar: ";
         cin>>auxClave;
         lectura>>clave;//lectura adelantada
 
         while(!lectura.eof()){
-            lectura>>nombre>>semestre>>grupo>>edad;//leyendo los campos del registro
+            lectura>>nombreDeCiudad>>pais>>superficie>>cantidad_terminales>>destinos_nacionales>>destinos_internacionales;//leyendo los campos del registro
             //Comparar cada registro para ver si es encontrado
             if(auxClave==clave){
-                cout<<"______________________________"<<endl;
-                cout<<"Clave: "<<clave<<endl;
-                cout<<"Nombre: "<<nombre<<endl;
-                cout<<"Semestre: "<<semestre<<endl;
-                cout<<"Grupo: "<<grupo<<endl;
-                cout<<"Edad: "<<edad<<endl;
-                cout<<"______________________________"<<endl;
+                cout<<"____________________________________________________"<<endl;
+                cout<<clave<<" "<<nombreDeCiudad<<" "<<pais<<" "<<superficie<<" "<<cantidad_terminales<<" "<<destinos_nacionales<<" "
+                <<destinos_internacionales<<endl;
+                cout<<"_____________________________________________________"<<endl;
                 encontrado=true;
             }
-
-            lectura>>clave;//lectura adelantada
+            lectura>>clave;//lectura adelantada, sigue consultado las siguientes claves.
         }
         if(encontrado==false){
             cout<<"No hay registros con la Clave "<<auxClave<<endl;
@@ -163,7 +162,7 @@ void buscar(){
     //cerrando el archivo
     lectura.close();
 }
-*/
+
 
 void modificaciones(){
 }
