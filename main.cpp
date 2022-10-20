@@ -72,7 +72,7 @@ void leerArchivo(){
     }
 }
 
-void buscar(){
+void buscarTerminal(){
     ifstream lectura;//Creamos la variable de tipo lectura
     lectura.open("terminales.txt",ios::out|ios::in);//Abrimos el archivo
     //validando la apertura del archivo
@@ -133,7 +133,7 @@ void menu(){
                 leerArchivo();
             break;
             case 4:
-                buscar();
+                buscarTerminal();
             break;
             case 5:
                 //modificaciones();
