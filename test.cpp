@@ -9,13 +9,14 @@ void altas();
 void bajas();
 void buscar();
 void consultas();
-void modificaciones();
 void salir();
 void menu();
 //Variables Globales
 string clave = " ",nombreDeCiudad = " ",pais = " ",auxClave = " ";
 float superficie = 0.0;
 int cantidad_terminales = 0,destinos_nacionales = 0,destinos_internacionales = 0;
+
+bool encontrado;
 
 
 
@@ -32,8 +33,7 @@ void menu(){
         cout<<"2. Bajas"<<endl;
         cout<<"3. Consultas"<<endl;
         cout<<"4. Buscar un Registro"<<endl;
-        cout<<"5. Modificaciones"<<endl;
-        cout<<"6. Salir"<<endl;
+        cout<<"5. Salir"<<endl;
         cout<<"Que deseas hacer? ";
         cin>>opcion;
         switch(opcion){
@@ -51,15 +51,12 @@ void menu(){
                 cout<<"entro al menu opcion 4"<<endl;
             break;
             case 5:
-                modificaciones();
-            break;
-            case 6:
                 salir();
             break;
             default:
                 cout<<"¡Opcion Incorrecta!"<<endl;
         }
-    }while(opcion!=6);
+    }while(opcion!=5);
 }//Fin funcion menu
 void altas(){
     ofstream escritura;
@@ -105,27 +102,7 @@ void altas(){
     consulta.close();
 }//Fin funcion altas de terminales......
 
-// NO ANDA LA FUNCION CONSULTAS!!.
-/*
-void consultas(){
-    ifstream lectura;
-    lectura.open("terminales.txt",ios::in);
-    if(lectura.is_open()){
-        cout<<"Registros del Archivo terminales.txt"<<endl;
-        cout<<"________________________________"<<endl;
-        lectura>>clave;
-        while(!lectura.eof()){
-            lectura>>nombreDeCiudad>>pais>>superficie>>cantidad_terminales>>destinos_nacionales>>destinos_internacionales;
-            cout<<clave<<nombreDeCiudad<<pais<<superficie<<cantidad_terminales<<destinos_nacionales<<destinos_internacionales<<endl;
-            lectura>>clave;
-            cout<<"________________________________"<<endl;
-        }
-    }else{
-        cout<<"Error, el Archivo No se Pudo Abrir, No ha sido creado"<<endl;
-    }
-    lectura.close();
-}//Fin funcion consultas
-*/
+
 
 void bajas(){
 }
@@ -164,8 +141,9 @@ void buscar(){
 }
 
 
-void modificaciones(){
-}
+
+
+
 void salir(){
     cout<<"Programa Finalizado"<<endl;
 }

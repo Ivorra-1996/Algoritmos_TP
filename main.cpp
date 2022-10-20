@@ -106,10 +106,6 @@ void buscarTerminal(){
 }
 
 
-void salir(){
-    cout<<"Programa Finalizado"<<endl;
-}
-
 void menu(){
     int opcion=0;
     do{
@@ -118,33 +114,29 @@ void menu(){
         cout<<"2. Bajas"<<endl;
         cout<<"3. Consultas"<<endl;
         cout<<"4. Buscar un Registro"<<endl;
-        cout<<"5. Modificaciones"<<endl;
-        cout<<"6. Salir"<<endl;
+        cout<<"5. Salir"<<endl;
         cout<<"Que deseas hacer? ";
         cin>>opcion;
         switch(opcion){
             case 1:
                 altas();
-            break;
+                break;
             case 2:
                 //bajas();
-            break;
+                break;
             case 3:
                 leerArchivo();
-            break;
+                break;
             case 4:
                 buscarTerminal();
-            break;
+                break;
             case 5:
-                //modificaciones();
-            break;
-            case 6:
-                salir();
-            break;
+                cout<<"Programa Finalizado"<<endl;
+                break;
             default:
                 cout<<"¡Opcion Incorrecta!"<<endl;
         }
-    }while(opcion!=6);
+    }while(opcion!=5);
 }//Fin funcion menu
 
 
@@ -156,55 +148,3 @@ int main(){
 
 
 
-
-// codigo viejo 
-/*
-
-void modificaciones(){
-    ofstream auxiliar;
-    ifstream lectura;
-    bool encontrado=false;
-    string claveDeTerminal =" ";
-    char terminal;
-    auxiliar.open("auxiliar.txt",ios::out);
-    lectura.open("alumnos.txt",ios::in);
-    if(auxiliar.is_open() && lectura.is_open()){
-        cout<<"Ingresa la clave de la terminal que desea modificar; ";
-        cin>>claveDeTerminal;
-        
-
-    }
-    else{
-        cout<<"Error al abrir el archivo"<<endl;
-    }
-}
-
-
-void escribirArchivo(){
-    archivo.open("terminales.txt",ios::out);
-    if(archivo.is_open()){
-        cout<<"Escriba exit para terminar el archivo..\n";
-        string salida_linea_texto;
-        while(true){
-            string linea; //lee cada linea
-            getline(cin,linea);
-            if(linea == "exit"){
-                break;
-            }
-            salida_linea_texto += linea+'\n';    
-        }
-        archivo<<salida_linea_texto;
-        archivo.close();
-    }
-    else{
-        cout<<"No se encontro el archivo";
-    }
-}
-
-int main(){
-    leerArchivo();
-    escribirArchivo();
-    leerArchivo();
-    system("pause");
-    return 0 ;
-}*/
