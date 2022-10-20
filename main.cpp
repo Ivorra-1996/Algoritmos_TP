@@ -2,6 +2,7 @@
 #include<iostream>
 #include<fstream>
 #include<string.h>
+#include<viaje.cpp>
 using namespace std;
 
 //Variables Globales
@@ -99,6 +100,8 @@ void bajas(){
 
 
 void leerArchivo(){
+    ofstream viajes;
+    viajes.open("viajes.txt",ios::out);
     archivo.open("terminales.txt",ios::in);//importamos y leemos el archivo
     if(archivo.is_open()){
         string linea;
@@ -112,6 +115,7 @@ void leerArchivo(){
     else{
         cout<<"Error en leer el archivo...";
     }
+    viajes.close();
 }
 
 void buscarTerminal(){
