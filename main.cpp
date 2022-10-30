@@ -2,28 +2,29 @@
 #include<iostream>
 #include<fstream>
 #include<string.h>
-#include<viaje.cpp>
 using namespace std;
 
 //Variables Globales
-string clave = " ",nombreDeCiudad = " ",pais = " ",auxClave = " ";
+string clave = " ",nombre = " ",ciudad = " ",pais = " ",auxClave = " ";
 float superficie = 0.0;
 int cantidad_terminales = 0,destinos_nacionales = 0,destinos_internacionales = 0;
 bool encontrado;
 fstream archivo;
 
+// Funcio de altas de terminales, crea la terminal.
 void altas(){
-    ofstream escritura;
-    ifstream consulta;
+    ofstream escritura; //variable de escritura del txt
+    ifstream consulta; // variable de consulta
     bool repetido = false;
-    escritura.open("terminales.txt",ios::out|ios::app);
-    consulta.open("terminales.txt",ios::in);
-    if(escritura.is_open() && consulta.is_open()){
+    escritura.open("terminales.txt",ios::out|ios::app); //abre el archivo txt con formato de entrada y salida.
+    consulta.open("terminales.txt",ios::in); // y abre otro archivo del mismo txt, pero de consulta.
+    if(escritura.is_open() && consulta.is_open()){ //verifica si ambos estan abiertos.
         cout<<"Ingresa la Clave de la termnal: ";
-        cin>>auxClave;
-        consulta>>clave;
-        while(!consulta.eof()){
-            consulta>>nombreDeCiudad>>pais>>superficie>>cantidad_terminales>>destinos_nacionales>>destinos_internacionales;
+        cin>>auxClave; //Ingresamos la clave auxiliar.
+        consulta>>clave; // consulta la copia del archivo la primera clave y la inicializa.
+        while(!consulta.eof()){ // el bucle deja de funcionar cuando no tiene mas renglones(sean escritos o vacios).
+            //
+            consulta>>nombre>>ciudad>>pais>>superficie>>cantidad_terminales>>destinos_nacionales>>destinos_internacionales;
             if(clave == auxClave){
                 cout<<"Ya Existe un Registro con esta Clave"<<endl;
                 repetido=true;
@@ -32,8 +33,10 @@ void altas(){
             consulta>>clave;
         }
         if(repetido==false){
-            cout<<"Ingresa el nombre de ciudad: ";
-            cin>>nombreDeCiudad;
+            cout<<"Ingresa el nombre de terminal: ";
+            cin>>nombre;
+            cout<<"Ingrese nombre de ciudad: ";
+            cin>>ciudad;
             cout<<"Ingresa el nombre del pais: ";
             cin>>pais;
             cout<<"Ingresa la superficie(float): ";
@@ -44,14 +47,15 @@ void altas(){
             cin>>destinos_nacionales;
             cout<<"Ingresa la destinos internacionales: ";
             cin>>destinos_internacionales;
-            escritura<<auxClave<<" "<<nombreDeCiudad<<" "<<pais<<" "<<superficie<<" "<<cantidad_terminales<<" "<<destinos_nacionales<<" "
+            escritura<<auxClave<<" "<<nombre<<" "<<ciudad<<" "<<pais<<" "<<superficie<<" "<<cantidad_terminales<<" "<<destinos_nacionales<<" "
             <<destinos_internacionales<<endl;
-            cout<<"Registro Ageragado"<<endl;
+            cout<<"Registro Agregado."<<endl;
         }
 
     }else{
-        cout<<"Error, el Archivo No se Pudo Abrir o No ha sido Creado"<<endl;
+        cout<<"Error, el archivo NO se pudo abrir o NO ha sido creado"<<endl;
     }
+    //Cierra ambos archivos para que no alla futuros errores y no queden abiertos.
     escritura.close();
     consulta.close();
 }//Fin funcion altas de terminales......
@@ -70,16 +74,16 @@ void bajas(){
         lectura>>clave;
         while (!lectura.eof())
         {
-            lectura>>nombreDeCiudad>>pais>>superficie>>cantidad_terminales>>destinos_nacionales>>destinos_internacionales;
+            lectura>>nombre>>ciudad>>pais>>superficie>>cantidad_terminales>>destinos_nacionales>>destinos_internacionales;
             if(auxClave == clave){
                 encontrado = true;
                 cout<<"____________________________________________________"<<endl;
-                cout<<clave<<" "<<nombreDeCiudad<<" "<<pais<<" "<<superficie<<" "<<cantidad_terminales<<" "<<destinos_nacionales<<" "
+                cout<<clave<<" "<<nombre<<" "<<ciudad<<" "<<pais<<" "<<superficie<<" "<<cantidad_terminales<<" "<<destinos_nacionales<<" "
                 <<destinos_internacionales<<endl;
                 cout<<"____________________________________________________"<<endl;
                 
             }else{
-                archivoAux<<clave<<" "<<nombreDeCiudad<<" "<<pais<<" "<<superficie<<" "<<cantidad_terminales<<" "<<destinos_nacionales<<" "
+                archivoAux<<clave<<" "<<nombre<<" "<<ciudad<<" "<<pais<<" "<<superficie<<" "<<cantidad_terminales<<" "<<destinos_nacionales<<" "
                 <<destinos_internacionales<<endl;
             }
             lectura>>clave;
@@ -128,13 +132,12 @@ void buscarTerminal(){
         cout<<"Ingresa la Clave de la terminal que deseas Buscar: ";
         cin>>auxClave;
         lectura>>clave;//lectura adelantada
-
         while(!lectura.eof()){
-            lectura>>nombreDeCiudad>>pais>>superficie>>cantidad_terminales>>destinos_nacionales>>destinos_internacionales;//leyendo los campos del registro
+            lectura>>nombre>>ciudad>>pais>>superficie>>cantidad_terminales>>destinos_nacionales>>destinos_internacionales;//leyendo los campos del registro
             //Comparar cada registro para ver si es encontrado
             if(auxClave==clave){
                 cout<<"____________________________________________________"<<endl;
-                cout<<clave<<" "<<nombreDeCiudad<<" "<<pais<<" "<<superficie<<" "<<cantidad_terminales<<" "<<destinos_nacionales<<" "
+                cout<<clave<<" "<<nombre<<" "<<ciudad<<" "<<pais<<" "<<superficie<<" "<<cantidad_terminales<<" "<<destinos_nacionales<<" "
                 <<destinos_internacionales<<endl;
                 cout<<"_____________________________________________________"<<endl;
                 encontrado=true;
@@ -193,4 +196,5 @@ int main(){
 }
 
 
+// Problemas con los espacios a la hora de ingresar las terminales por alta.
 

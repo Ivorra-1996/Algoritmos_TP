@@ -47,5 +47,7 @@
         "streambuf": "cpp",
         "typeinfo": "cpp"
     },
-    "C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Disabled",
+    "vscode-pets.petColor": "black",
+    "vscode-pets.petType": "dog"
 }
