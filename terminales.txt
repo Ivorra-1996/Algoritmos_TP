@@ -1,1 +1,3 @@
 RET Terminal Retiro Argentina 34.75 4 12 46
+
+COR Terminal Cordoba Argentina 12 3 2 4

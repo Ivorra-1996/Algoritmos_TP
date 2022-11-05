@@ -2,6 +2,8 @@
 #include<iostream>
 #include<fstream>
 #include<string.h>
+#include<vector>
+
 using namespace std;
 
 //Variables Globales
@@ -11,6 +13,29 @@ int cantidad_terminales = 0,destinos_nacionales = 0,destinos_internacionales = 0
 bool encontrado;
 fstream archivo;
 
+class Terminal{
+    public:
+    string clave;
+    string nombre;
+    string ciudad;
+    string pais;
+    float superficie;
+    int cantidad_terminales;
+    int destinos_nacionales;
+    int destinos_internacionales;
+};
+
+vector<Terminal> terminales;
+
+unsigned long long CharToInt(char entrada)
+{
+	unsigned long long Salida;
+	Salida = entrada;
+	return Salida;
+}
+
+
+
 // Funcio de altas de terminales, crea la terminal.
 void altas(){
     ofstream escritura; //variable de escritura del txt
@@ -18,21 +43,21 @@ void altas(){
     bool repetido = false;
     escritura.open("terminales.txt",ios::out|ios::app); //abre el archivo txt con formato de entrada y salida.
     consulta.open("terminales.txt",ios::in); // y abre otro archivo del mismo txt, pero de consulta.
-    if(escritura.is_open() && consulta.is_open()){ //verifica si ambos estan abiertos.
+    if(escritura.is_open() /*&& consulta.is_open()*/){ //verifica si ambos estan abiertos.
         cout<<"Ingresa la Clave de la termnal: ";
         cin>>auxClave; //Ingresamos la clave auxiliar.
-        consulta>>clave; // consulta la copia del archivo la primera clave y la inicializa.
-        while(!consulta.eof()){ // el bucle deja de funcionar cuando no tiene mas renglones(sean escritos o vacios).
-            //
-            consulta>>nombre>>ciudad>>pais>>superficie>>cantidad_terminales>>destinos_nacionales>>destinos_internacionales;
-            if(clave == auxClave){
-                cout<<"Ya Existe un Registro con esta Clave"<<endl;
+        for (int i = 0; i < terminales.size(); i++)
+        {
+            if (terminales[i].clave == auxClave)
+            {
+                cout<<endl;
+                cout<<"Ya existe una terminal con ese codigo en la tabla hash"<<endl;
+                cout<<endl;
                 repetido=true;
-                break;
             }
-            consulta>>clave;
         }
         if(repetido==false){
+            Terminal terminal;
             cout<<"Ingresa el nombre de terminal: ";
             cin>>nombre;
             cout<<"Ingrese nombre de ciudad: ";
@@ -47,10 +72,43 @@ void altas(){
             cin>>destinos_nacionales;
             cout<<"Ingresa la destinos internacionales: ";
             cin>>destinos_internacionales;
-            escritura<<auxClave<<" "<<nombre<<" "<<ciudad<<" "<<pais<<" "<<superficie<<" "<<cantidad_terminales<<" "<<destinos_nacionales<<" "
-            <<destinos_internacionales<<endl;
-            cout<<"Registro Agregado."<<endl;
+
+            //Agrega los atributos a la terminal objeto.
+            terminal.nombre = nombre;
+            terminal.clave = auxClave;
+            terminal.ciudad = ciudad;
+            terminal.pais = pais;
+            terminal.superficie = superficie;
+            terminal.cantidad_terminales = cantidad_terminales;
+            terminal.destinos_nacionales = destinos_nacionales;
+            terminal.destinos_internacionales = destinos_internacionales;
+            //lo pushea a la lista.
+            terminales.push_back(terminal);
         }
+        //antes de entrar al bucle consulta la primera clave.
+            //consulta>>clave; // consulta la copia del archivo la primera clave y la inicializa.
+            while(!consulta.eof()){ // el bucle deja de funcionar cuando no tiene mas renglones(sean escritos o vacios).
+                consulta>>clave>>nombre>>ciudad>>pais>>superficie>>cantidad_terminales>>destinos_nacionales>>destinos_internacionales;
+                if(clave == auxClave){
+                    cout<<"---------------"<<endl;
+                    cout<<"Ya Existe un Registro con esta Clave en txt"<<endl;
+                    cout<<"-------------------"<<endl;
+                    //break;
+                    escritura.close();
+                    consulta.close();
+                    return;
+                }
+                consulta>>clave;
+            }
+           /*escritura<<auxClave<<" "<<nombre<<" "<<ciudad<<" "<<pais<<" "<<superficie<<" "<<cantidad_terminales<<" "<<destinos_nacionales<<" "
+            <<destinos_internacionales<<endl;*/
+            for (int i = 0; i < terminales.size(); i++)
+            {
+                escritura<< terminales[i].clave << " " << terminales[i].nombre << " " << terminales[i].ciudad << " " << terminales[i].pais << " " 
+                << terminales[i].superficie << " " << terminales[i].cantidad_terminales << " " << terminales[i].destinos_nacionales << " " 
+                << terminales[i].destinos_internacionales << endl;
+            }
+            cout<<"Registro Agregado."<<endl;
 
     }else{
         cout<<"Error, el archivo NO se pudo abrir o NO ha sido creado"<<endl;
@@ -103,15 +161,49 @@ void bajas(){
 }
 
 
+// Compila, falta probarlo.
+long obtenerPosicion(std::string entrada){
+	long Salida = 0;
+	for(int i = 0;entrada[i] != '\0';i++){
+		if(entrada[1+i] == '\0' && i==0)
+			Salida += CharToInt(entrada[i]);
+		else{
+			if(i==0){
+				Salida += CharToInt(entrada[i]);
+				continue;
+                }
+			else{
+                    int miChar = CharToInt(entrada[i]);
+                    if(miChar>99){
+                        Salida*=1000;
+                        }
+                    else if(miChar>9){
+                        Salida*=100;
+                        }
+                    Salida += miChar;
+                }	
+		}
+	}
+	return Salida;
+}
+
+
+
+/*
 void leerArchivo(){
-    ofstream viajes;
-    viajes.open("viajes.txt",ios::out);
+    ifstream read("terminales.txt");
+    consulta.open("terminales.txt",ios::in);
+
     archivo.open("terminales.txt",ios::in);//importamos y leemos el archivo
+    
+    int posicion;
+    string entrada = "";
     if(archivo.is_open()){
-        string linea;
         cout<<"___________________________________________________________"<<endl;
-        while(getline(archivo,linea)){
-            cout<<linea<<endl;
+        while(!consulta.eof() && consulta.is_open()){
+            entrada = read>>clave;
+            posicion = obtenerPosicion(entrada);
+            cout<<"posicion"<<posicion<<"";
         }
         cout<<"___________________________________________________________"<<endl;
         archivo.close();
@@ -119,8 +211,8 @@ void leerArchivo(){
     else{
         cout<<"Error en leer el archivo...";
     }
-    viajes.close();
-}
+    consulta.close();
+}*/
 
 void buscarTerminal(){
     ifstream lectura;//Creamos la variable de tipo lectura
