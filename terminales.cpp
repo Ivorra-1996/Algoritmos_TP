@@ -54,6 +54,7 @@ void altas(){
                 cout<<"Ya existe una terminal con ese codigo en la tabla hash"<<endl;
                 cout<<endl;
                 repetido=true;
+                break;
             }
         }
         if(repetido==false){
@@ -87,29 +88,29 @@ void altas(){
         }
         //antes de entrar al bucle consulta la primera clave.
             //consulta>>clave; // consulta la copia del archivo la primera clave y la inicializa.
-            while(!consulta.eof()){ // el bucle deja de funcionar cuando no tiene mas renglones(sean escritos o vacios).
-                consulta>>clave>>nombre>>ciudad>>pais>>superficie>>cantidad_terminales>>destinos_nacionales>>destinos_internacionales;
-                if(clave == auxClave){
-                    cout<<"---------------"<<endl;
-                    cout<<"Ya Existe un Registro con esta Clave en txt"<<endl;
-                    cout<<"-------------------"<<endl;
-                    //break;
-                    escritura.close();
-                    consulta.close();
-                    return;
-                }
-                consulta>>clave;
+        while(!consulta.eof()){ // el bucle deja de funcionar cuando no tiene mas renglones(sean escritos o vacios).
+            consulta>>clave>>nombre>>ciudad>>pais>>superficie>>cantidad_terminales>>destinos_nacionales>>destinos_internacionales;
+            if(clave == auxClave){
+                cout<<"---------------"<<endl;
+                cout<<"Ya Existe un Registro con esta Clave en txt"<<endl;
+                cout<<"-------------------"<<endl;
+                //break;
+                escritura.close();
+                consulta.close();
+                return;
             }
+            consulta>>clave;
+        }
            /*escritura<<auxClave<<" "<<nombre<<" "<<ciudad<<" "<<pais<<" "<<superficie<<" "<<cantidad_terminales<<" "<<destinos_nacionales<<" "
             <<destinos_internacionales<<endl;*/
-            for (int i = 0; i < terminales.size(); i++)
-            {
-                escritura<< terminales[i].clave << " " << terminales[i].nombre << " " << terminales[i].ciudad << " " << terminales[i].pais << " " 
-                << terminales[i].superficie << " " << terminales[i].cantidad_terminales << " " << terminales[i].destinos_nacionales << " " 
-                << terminales[i].destinos_internacionales << endl;
-            }
-            cout<<"Registro Agregado."<<endl;
-
+        for (int i = 0; i < terminales.size(); i++)
+        {
+            escritura<< terminales[i].clave << " " << terminales[i].nombre << " " << terminales[i].ciudad << " " << terminales[i].pais << " " 
+            << terminales[i].superficie << " " << terminales[i].cantidad_terminales << " " << terminales[i].destinos_nacionales << " " 
+            << terminales[i].destinos_internacionales << endl;
+        }
+        cout<<"Registro Agregado."<<endl;
+        
     }else{
         cout<<"Error, el archivo NO se pudo abrir o NO ha sido creado"<<endl;
     }

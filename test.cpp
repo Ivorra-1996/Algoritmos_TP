@@ -34,10 +34,7 @@ int main(){
             clave += linea[i];
         }
         cout<<clave<<'\n';
-        for(int i = 0; i <= 2;i++){
-            clave[i] = " ";
-        }
-        clave = "";
+        clave = "asdasdasdas";
     }
     
     return 0;
