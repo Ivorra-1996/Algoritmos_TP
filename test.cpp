@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "terminales.cpp"
 
 using namespace std;
 
@@ -34,8 +35,12 @@ int main(){
             clave += linea[i];
         }
         cout<<clave<<'\n';
-        clave = "asdasdasdas";
+        
+        cout<<obtenerPosicion(clave)<<endl;
+        clave = "";
     }
+    
+
     
     return 0;
 }

@@ -26,6 +26,7 @@ class Terminal{
 };
 
 vector<Terminal> terminales;
+vector<string>listaDePrueba;
 
 unsigned long long CharToInt(char entrada)
 {
@@ -43,7 +44,7 @@ void altas(){
     bool repetido = false;
     escritura.open("terminales.txt",ios::out|ios::app); //abre el archivo txt con formato de entrada y salida.
     consulta.open("terminales.txt",ios::in); // y abre otro archivo del mismo txt, pero de consulta.
-    if(escritura.is_open() /*&& consulta.is_open()*/){ //verifica si ambos estan abiertos.
+    if(escritura.is_open() && consulta.is_open()){ //verifica si ambos estan abiertos.
         cout<<"Ingresa la Clave de la termnal: ";
         cin>>auxClave; //Ingresamos la clave auxiliar.
         for (int i = 0; i < terminales.size(); i++)
@@ -87,7 +88,7 @@ void altas(){
             terminales.push_back(terminal);
         }
         //antes de entrar al bucle consulta la primera clave.
-            //consulta>>clave; // consulta la copia del archivo la primera clave y la inicializa.
+        //consulta>>clave; // consulta la copia del archivo la primera clave y la inicializa.
         while(!consulta.eof()){ // el bucle deja de funcionar cuando no tiene mas renglones(sean escritos o vacios).
             consulta>>clave>>nombre>>ciudad>>pais>>superficie>>cantidad_terminales>>destinos_nacionales>>destinos_internacionales;
             if(clave == auxClave){
@@ -110,7 +111,7 @@ void altas(){
             << terminales[i].destinos_internacionales << endl;
         }
         cout<<"Registro Agregado."<<endl;
-        
+
     }else{
         cout<<"Error, el archivo NO se pudo abrir o NO ha sido creado"<<endl;
     }
@@ -214,6 +215,41 @@ void leerArchivo(){
     }
     consulta.close();
 }*/
+
+// Carga la terminales a la lista.
+// No anda.
+void cargarTerminales(){
+    string linea;
+    std ::string clave;
+    ifstream terminales("terminales.txt");
+    if(terminales.is_open()){
+        while (getline(terminales,linea)){
+            //cout<<linea<<endl;
+            for(int i = 0; i <= 2;i++){
+                clave += linea[i];
+            }
+            cout<<clave<<'\n';
+            //cout<<obtenerPosicion(clave)/100000<<endl;
+            listaDePrueba.insert(listaDePrueba.begin() + obtenerPosicion(clave),linea);
+            //listaDePrueba[obtenerPosicion(clave)/100000] = linea;
+            clave = "";
+            listaDePrueba.push_back(linea);
+        }
+        cout<<"fuera del while"<<endl;
+        for (int i = 0; i < listaDePrueba.size(); i++)
+        {
+            cout<<"for 2"<<endl;
+            cout<<listaDePrueba[i]<<endl;
+        }
+    }
+    else{
+        cout<<"Error en leer el archivo...";
+    }
+    terminales.close();
+    cout<<"Fin"<<endl;
+}
+
+
 
 void buscarTerminal(){
     ifstream lectura;//Creamos la variable de tipo lectura

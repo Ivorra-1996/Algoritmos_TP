@@ -38,7 +38,7 @@ void menu(){
 
 
 int main(){
-    //leerArchivo();
+    cargarTerminales();
     menu();
     return 0;
     system("PAUSE");
