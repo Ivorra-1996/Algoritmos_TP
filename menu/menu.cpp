@@ -4,12 +4,12 @@ void menu(){
     int opcion=0;
     do{
         cout<<"Manejo de Archivos en C++"<<endl;
-        cout<<"1. Altas"<<endl;
-        cout<<"2. Bajas"<<endl;
-        cout<<"3. Consultas"<<endl;
-        cout<<"4. Buscar un Registro"<<endl;
-        cout<<"5. Salir"<<endl;
-        cout<<"Que deseas hacer? ";
+        cout<<"1. Dar alta una terminal."<<endl;
+        cout<<"2. Dar de baja una terminal."<<endl;
+        cout<<"3. Consultar una terminal."<<endl;
+        cout<<"4. Consultar todas las terminales."<<endl;
+        cout<<"5. Salir."<<endl;
+        cout<<"Que deseas hacer?.";
         cin>>opcion;
         switch(opcion){
             case 1:
@@ -20,9 +20,11 @@ void menu(){
                 break;
             case 3:
                 //leerArchivo();
+                consultarTerminal();
                 break;
             case 4:
-                buscarTerminal();
+                //buscarTerminal();
+                cantidadeDeTerminales();
                 break;
             case 5:
                 cout<<"Programa Finalizado"<<endl;
@@ -35,8 +37,10 @@ void menu(){
 
 
 int main(){
-    //cargarTerminales();
+    leerTxt();
     menu();
+    //aca iria un ordena la lista.
+
     return 0;
     system("PAUSE");
 }
@@ -44,8 +48,9 @@ int main(){
 
 // Problemas con los espacios a la hora de ingresar las terminales por alta.
 
-// el programa cuando inicia, tiene que leer el archivo y carga todos los datos en la tabla hash, despues cuando se hace el alta, debe verificar que
-// no este alguno duplicado en la tabla, sino lo agrega lo mas bien a la tabla hash.
+// el programa cuando inicia, tiene que leer el archivo y carga todos los datos en la tabla terminales, 
+// despues cuando se hace el alta, debe verificar que no este alguno duplicado en la tabla, 
+// sino lo agrega lo mas bien a la tabla hash.
 // Si se da de baja alguno lo saca de la tabla hash si existe.
 // Hacer 2 funciones una que lea toda la tabla hash ordenada y la pritea por pantalla.
 //  y otra que es cargar datos del txt a la tabla hash cuando inicia el programa.
