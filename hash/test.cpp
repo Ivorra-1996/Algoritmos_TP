@@ -1,46 +1,116 @@
 #include <iostream>
-#include <fstream>
-#include <string>
-#include "terminales.cpp"
+#include <list>
+#include <cstring>
 
 using namespace std;
 
-/*
-int main() {
-    //string x = "This is C++.";
-    //ofstream of("d:/tester.txt");
-    //of << x;
-    //of.close();
+class TablaHash { 
+    private:
+        static const int largoIndice = 10;
+        list<pair<int, string> > indice[largoIndice];
+    
+    public:
+        bool estaVacia() const;
+        int hash(int codigo);
+        void insertarItem(int codigo, string valor);
+        void borrarItem(int codigo);
+        string buscar(int codigo);
+        void imprimir();
+};
 
-    string x;
-
-
-
-    ifstream read("terminales.txt");
-    read >> x;
-    cout << x << endl ;
-}
-*/
-
-
-int main(){
-    string linea;
-    std ::string clave = "";
-    string renglon;
-    ifstream terminales("terminales.txt");
-    while (getline(terminales,linea))
-    {
-        cout<<linea<<endl;
-        for(int i = 0; i <= 2;i++){
-            clave += linea[i];
-        }
-        cout<<clave<<'\n';
-        
-        cout<<obtenerPosicion(clave)<<endl;
-        clave = "";
+bool TablaHash::estaVacia() const {
+    int sum;
+    for (int i=0; i < largoIndice; i++) {
+        sum += indice[i].size();
     }
-    
-
-    
-    return 0;
+    if (!sum) {
+        return true;
+    }
+    return false;
 }
+
+int TablaHash::hash(int codigo) {
+    return codigo % largoIndice; 
+}
+
+void TablaHash::insertarItem(int codigo, string valor) {
+    int hashValue = hash(codigo);
+    auto&& cell = indice[hashValue];
+    auto bItr = begin(cell);
+    bool keyExists = false;
+    for (; bItr != end(cell); bItr++) {
+        if (bItr->first == codigo) {
+            keyExists = true;
+            bItr->second = valor;
+            cout << "El codigo ya existe, reemplazarlo." << endl;
+            break;
+        }
+    }
+    if (!keyExists) {
+        cell.emplace_back(codigo, valor);
+    }
+    return;
+}
+
+void TablaHash::borrarItem(int codigo) {
+    int hashValue = hash(codigo);
+    auto&& cell = indice[hashValue];
+    auto bItr = begin(cell);
+    bool keyExists = false;
+    for (; bItr != end(cell); bItr++) {
+        if (bItr->first == codigo) {
+            keyExists = true;
+            bItr = cell.erase(bItr);
+            cout << "Item reemplazado" << endl;
+            break;
+        }
+    }
+    if (!keyExists) {
+        cout << "codigo no encontrada" << endl;
+    }
+    return;
+}
+
+void TablaHash::imprimir() {
+    for (int i=0; i < largoIndice; i++) {
+        if (indice[i].size() == 0) continue;
+
+        auto bItr = indice[i].begin();
+        for (; bItr != indice[i].end(); bItr++) {
+            cout << "Key: " << bItr->first << "Valor: " << bItr->second << endl;
+        }
+    }
+    return;
+}
+
+int main() {
+    TablaHash HT;
+
+    if (HT.estaVacia()) {
+        cout << "la tabla esta vacia" << endl;
+    }else {
+        cout << "la tabla no esta vacia" << endl;
+    }
+
+HT.insertarItem(100, "Martin");
+HT.insertarItem(201, "Maria");
+HT.insertarItem(332, "Pepe");
+HT.insertarItem(124, "Seba");
+HT.insertarItem(929, "Juan");
+HT.insertarItem(929, "Segundo");
+
+HT.imprimir();
+
+HT.borrarItem(332);
+HT.borrarItem(100);
+
+if (HT.estaVacia()) {
+    cout << "hay que revisar el codigo" << endl;
+ } else {
+    cout << "correcto!" << endl;
+ }
+
+}
+
+
+
