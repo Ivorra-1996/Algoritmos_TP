@@ -1,46 +1,57 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include "terminales.cpp"
+#include<iostream>
+#include<fstream>
+#include<string>
+#include<vector>
+#include"terminales/terminales.cpp"
 
 using namespace std;
 
-/*
-int main() {
-    //string x = "This is C++.";
-    //ofstream of("d:/tester.txt");
-    //of << x;
-    //of.close();
+// Cambiar instrucciones de funciones.
+int obtenerIndice(std::string clave){
+    terminales.resize(30); //tamaño del array
+    int acc = 0;
+    for (int i = 0; i < clave.size(); i++)
+    {
+        acc += clave[i];
+    }
+    
+    return acc % terminales.size();
 
-    string x;
-
-
-
-    ifstream read("terminales.txt");
-    read >> x;
-    cout << x << endl ;
 }
-*/
 
+
+void funcionHash(std::string clave, Terminal terminal){
+    terminales.insert(terminales.begin() + obtenerIndice(clave),terminal);
+
+}
+
+Terminal crearTerminal(){
+    Terminal terminal;
+    terminal.clave = "MARTIN";
+    terminal.nombre = "nombre";
+    terminal.ciudad = "ciudad";
+    terminal.pais = "pais";
+    terminal.superficie = 32;
+    terminal.cantidad_terminales = 3;
+    terminal.destinos_nacionales = 2;
+    terminal.destinos_internacionales = 1;
+
+    return terminal;
+
+}
 
 int main(){
-    string linea;
-    std ::string clave = "";
-    string renglon;
-    ifstream terminales("terminales.txt");
-    while (getline(terminales,linea))
+    cout<<obtenerIndice("RET")<<endl;
+    cout<<obtenerIndice("COR")<<endl;
+    cout<<obtenerIndice("USH")<<endl;
+    funcionHash((crearTerminal().clave),crearTerminal());
+
+    for (int i = 0; i < terminales.size(); i++)
     {
-        cout<<linea<<endl;
-        for(int i = 0; i <= 2;i++){
-            clave += linea[i];
-        }
-        cout<<clave<<'\n';
-        
-        cout<<obtenerPosicion(clave)<<endl;
-        clave = "";
+        cout<<terminales[i].clave<<endl;
     }
     
 
-    
-    return 0;
+
+    return 0 ;
 }

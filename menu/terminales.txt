@@ -5,3 +5,4 @@ ROS Terminal_de_Rosario Santa_fe Argentina 2.5 2 7 12
 TUC Terminal_de_Tucuman Tucuman Argentina 40.7 5 9 2
 USH Terminal_de_Ushuaia Tierra_del_fuego Argentina 15.2 14 5 2
 SAL Terminal_de_Salta Salta Argentina 13.6 5 7 19
+ERT Terminal_de_ERT ERT Argentina 13.6 5 7 19
