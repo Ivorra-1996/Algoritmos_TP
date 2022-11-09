@@ -1,0 +1,7 @@
+RET Terminal_de_Retiro Buenos_Aires Argentina 34.75 4 12 46
+MDZ Terminal_de_Mendoza Mendoza Argentina 50.4 4 5 6
+COR Terminal_de_Cordoba Cordoba Argentina 12.8 3 2 4
+ROS Terminal_de_Rosario Santa_fe Argentina 2.5 2 7 12
+TUC Terminal_de_Tucuman Tucuman Argentina 40.7 5 9 2
+USH Terminal_de_Ushuaia Tierra_del_fuego Argentina 15.2 14 5 2
+SAL Terminal_de_Salta Salta Argentina 13.6 5 7 19
