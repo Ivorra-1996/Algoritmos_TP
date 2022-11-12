@@ -17,15 +17,15 @@ void menu(){
                 altas();
                 break;
             case 2:
-                bajas();
+                //bajas();
                 break;
             case 3:
                 //leerArchivo();
-                consultarTerminal();
+                //consultarTerminal();
                 break;
             case 4:
                 //buscarTerminal();
-                cantidadeDeTerminales();
+                //cantidadeDeTerminales();
                 break;
             case 5:
                 cout<<"Programa Finalizado"<<endl;
@@ -39,7 +39,7 @@ void menu(){
 
 int main(){
     //ordenarLista();
-    leerTxt();
+    //leerTxt();
     menu();
     //aca iria un ordena la lista.
     return 0;

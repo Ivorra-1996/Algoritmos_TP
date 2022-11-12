@@ -13,11 +13,30 @@ using namespace std;
 
 vector<Lista>terminales;
 
+
+int obtenerIndice(std::string clave){
+    terminales.resize(10);//tamaño del array
+    int acc = 0;
+    for (int i = 0; i < clave.size(); i++)
+    {
+        acc += clave[i];//RET -> R -> E -> T
+    }
+    
+    return acc % terminales.size();
+
+}
+
+/*
+void funcionHash(std::string clave, Terminal terminal){
+    terminales.insert(terminales.begin() + obtenerIndice(clave),terminal);
+
+}
+*/
+
 int main(){
-    Lista Lista0;
     Lista lista1;
     Terminal terminal1,terminal2;
-    terminal1.clave = "RET";
+    terminal1.clave = "ROC";
     terminal1.nombre = "Terminal_de_Retiro";
     terminal1.ciudad = "Buenos_A";
     terminal1.pais = "FALOPA";
@@ -26,7 +45,7 @@ int main(){
     terminal1.destinos_nacionales = 3;
     terminal1.destinos_internacionales = 10;
 
-    terminal2.clave = "MARTINI";
+    terminal2.clave = "COR";
     terminal2.nombre = "Terminal_de_Retiro";
     terminal2.ciudad = "Buenos_A";
     terminal2.pais = "FALOPA";
@@ -35,10 +54,36 @@ int main(){
     terminal2.destinos_nacionales = 3;
     terminal2.destinos_internacionales = 10;
 
-    lista1.alta(terminal1,1);
-    lista1.alta(terminal2,1);
+    int index1 = obtenerIndice(terminal1.clave);
+    int index2 = obtenerIndice(terminal2.clave);
 
-    lista1.mostrar();
+
+   
+
+    terminales[index1].alta(terminal1,1);
+    terminales[index2].alta(terminal2,1);
+    terminales[index2].alta(terminal2,1);
+    
+    for (int i = 0; i < terminales.size(); i++)
+    {
+        cout<<"Posicion: "<<i;
+        terminales[i].mostrar();
+    }
+    
+    /*
+    for (int i = 0; i < 1; i++)
+    {
+        Lista lista;
+        terminales.push_back(lista);
+    }
+
+    for (int i = 0; i < terminales.size(); i++)
+    {
+        cout<<"Posicion"<<i<<endl;
+        cout<<terminales[i].obtener_largo();
+    }
+    */
+    
 
    // terminales.push_back(lista1);
 

@@ -78,11 +78,7 @@ void Lista::mostrar(){
     cout << "]" <<endl;
 }
 
-void Lista::insertarProductos()
-{
-    for (int pos = 1; pos + 1 <= largo; pos += 2)
-        this->alta(consulta(pos), pos + 1);
-}
+
 
 
 

@@ -4,9 +4,8 @@
 #include<string.h>
 #include<vector>
 #include<sstream>
-//#include"terminal_clase.cpp"
 #include"../nodo/nodo.h"
-
+#include "..\nodo\lista.cpp"
 using namespace std;
 
 //Variables Globales
@@ -16,7 +15,7 @@ int cantidad_terminales = 0,destinos_nacionales = 0,destinos_internacionales = 0
 bool encontrado;
 fstream archivo;
 
-vector<Terminal> terminales;
+vector<Lista> terminales;
 
 
 int obtenerIndice(std::string clave){
@@ -31,11 +30,11 @@ int obtenerIndice(std::string clave){
 
 }
 
-
+/*
 void funcionHash(std::string clave, Terminal terminal){
     terminales.insert(terminales.begin() + obtenerIndice(clave),terminal);
 
-}
+}*/
 
 
 
@@ -43,8 +42,9 @@ void altas(){
     bool repetido = false;
     cout<<"Ingre la clave de la terminal:";
     cin>>auxClave;
-    for (int i = 0; i < terminales.size(); i++){
-        if (terminales[i].clave == auxClave){
+    int indice = obtenerIndice(auxClave);//hash
+    for (int i = 0; i < terminales[indice].obtener_largo(); i++){
+        if (terminales[i].consulta(i).clave == auxClave){
             cout<<endl;
             cout<<"Ya existe una terminal con ese codigo en la tabla hash"<<endl;
             cout<<endl;
@@ -79,11 +79,13 @@ void altas(){
         terminal.destinos_nacionales = destinos_nacionales;
         terminal.destinos_internacionales = destinos_internacionales;
         //lo pushea a la lista.
-        terminales.push_back(terminal);
+        
+        terminales[indice].alta(terminal,1);
+
     }
 }
 //Fin funcion altas de terminales......
-
+/*
 void bajas(){
     
     cout<<"Ingresa la clave de la terminal a eliminar:";
@@ -142,7 +144,8 @@ void cantidadeDeTerminales(){
     cout<<cant<<endl;
 }
 
-
+*/
+/*
 void leerTxt(){
     ifstream lectura;
     lectura.open("terminales.txt",ios::out|ios::in);
@@ -164,13 +167,17 @@ void leerTxt(){
                 terminal.cantidad_terminales = cantidad_terminales;
                 terminal.destinos_nacionales = destinos_nacionales;
                 terminal.destinos_internacionales = destinos_internacionales;
-                funcionHash((terminal.clave),terminal);
+                //funcionHash((terminal.clave),terminal);
                 //terminales.push_back(terminal);
+                int indice = obtenerIndice(terminal.clave);
+                terminales[indice].alta(terminal,1);
+
             }
             lectura.close();
             for (int i = 0; i < terminales.size(); i++)
             {
-                cout<<terminales[i].clave<< i <<endl;
+                cout<<"Posicion :"<< i <<endl;
+                terminales[i].mostrar();
             }
         }
         else
@@ -178,4 +185,4 @@ void leerTxt(){
             cout << "No se pudo abrir el archivo terminales.txt" << endl;
         }    
 }
-
+*/
