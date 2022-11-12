@@ -24,8 +24,7 @@ void menu(){
                 //consultarTerminal();
                 break;
             case 4:
-                //buscarTerminal();
-                //cantidadeDeTerminales();
+                mostrarTerminales();
                 break;
             case 5:
                 cout<<"Programa Finalizado"<<endl;
@@ -39,7 +38,7 @@ void menu(){
 
 int main(){
     //ordenarLista();
-    //leerTxt();
+    leerTxt();
     menu();
     //aca iria un ordena la lista.
     return 0;
