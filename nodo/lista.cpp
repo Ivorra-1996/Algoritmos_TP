@@ -10,8 +10,8 @@ bool Lista::vacia() {
     return (largo == 0);
 }
 
-void Lista::alta(Dato d, int pos) {
-    Nodo* nuevo = new Nodo(d);
+void Lista::alta(Terminal t, int pos) {
+    Nodo* nuevo = new Nodo(t);
 
     if (pos == 1) {
         nuevo -> cambiar_siguiente(primero);
@@ -35,7 +35,7 @@ Nodo* Lista::obtener_nodo(int pos) {
     return aux;
 }
 
-Dato Lista::consulta(int pos) {
+Terminal Lista::consulta(int pos) {
     Nodo* aux = obtener_nodo(pos);
     return aux->obtener_dato();
 }

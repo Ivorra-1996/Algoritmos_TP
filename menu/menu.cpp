@@ -1,5 +1,6 @@
 #include "../terminales/terminales.cpp"
 
+
 void menu(){
     int opcion=0;
     do{

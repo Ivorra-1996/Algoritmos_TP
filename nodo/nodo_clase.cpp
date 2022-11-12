@@ -1,20 +1,21 @@
 #include "nodo.h"
 
-Nodo::Nodo(Dato d) {
-    dato = d;
+
+Nodo::Nodo(Terminal t) {
+    terminal = t;
     siguiente = 0;
 }
 
-void Nodo::cambiar_dato(Dato d){
-    dato = d;
+void Nodo::cambiar_dato(Terminal t){
+    terminal = t;
 }
 
 void Nodo::cambiar_siguiente(Nodo* s) {
     siguiente = s;
 }
 
-Dato Nodo::obtener_dato() {
-    return dato;
+Terminal Nodo::obtener_dato() {
+    return terminal;
 }
 
 Nodo* Nodo::obtener_siguiente() {

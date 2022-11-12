@@ -4,7 +4,8 @@
 #include<string.h>
 #include<vector>
 #include<sstream>
-#include"terminal_clase.cpp"
+//#include"terminal_clase.cpp"
+#include"../nodo/nodo.h"
 
 using namespace std;
 

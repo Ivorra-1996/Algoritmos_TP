@@ -18,7 +18,7 @@ public:
     // pre: 0 < pos <= cantidad + 1
     // pos: inserta el dato d en la posicion pos, la 1 es la primera
     //        ademas incrementa cantidad en 1
-    void alta( Dato d, int pos);
+    void alta( Terminal d, int pos);
 
     // pre: 0 < pos <= cantidad
     // pos: saca el elemento que esta en pos
@@ -26,7 +26,7 @@ public:
 
     // pre: 0 < pos <= cantidad
     // pos: devuelve el elemento que esta en pos
-    Dato consulta(int pos);
+    Terminal consulta(int pos);
 
     bool vacia();
 
