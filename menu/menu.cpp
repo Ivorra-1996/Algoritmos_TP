@@ -20,8 +20,7 @@ void menu(){
                 bajas();
                 break;
             case 3:
-                //leerArchivo();
-                //consultarTerminal();
+                consultarTerminal();
                 break;
             case 4:
                 mostrarTerminales();
