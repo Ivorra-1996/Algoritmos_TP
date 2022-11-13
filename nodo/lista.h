@@ -37,6 +37,10 @@ public:
 
     void mostrar();
 
+    void mostrarTodo();
+
+    string retornaTodo();
+
     void insertarProductos();
     
     Nodo* obtener_nodo(int pos);

@@ -5,8 +5,8 @@
 #include<vector>
 #include<sstream>
 #include"../nodo/nodo.h"
-#include"..\nodo\lista.cpp"
-#include"..\nodo\nodo_clase.cpp"
+#include"../nodo/lista.cpp"
+#include"../nodo/nodo_clase.cpp"
 using namespace std;
 
 //Variables Globales
@@ -141,7 +141,7 @@ void consultarTerminal(){
 };
 
 
-void mostrarTerminales(){
+void mostrarTerminalesHash(){
     for (int i = 0; i < terminales.size(); i++)
     {
         cout<<"Posicion ->"<<i<<" ";
@@ -150,6 +150,22 @@ void mostrarTerminales(){
 
 }
 
+void mostrarTerminalesCompletas(){
+    for (int i = 0; i < terminales.size(); i++)
+    {
+        terminales[i].mostrarTodo();
+    }
+
+}
+
+string retornarTodasLasTerminales(){
+    string term = "";
+    for (int i = 0; i < terminales.size(); i++)
+    {
+        term = term + terminales[i].retornaTodo();
+    }
+    return term;
+}
 
 
 void leerTxt(){
@@ -175,5 +191,17 @@ void leerTxt(){
         {
             cout << "No se pudo abrir el archivo terminales.txt" << endl;
         }    
+}
+
+void escribirTxt(){
+    ofstream archivo;
+    //archivo.open("terminales_salida.txt", ios::out|ios::in);
+    archivo.open("terminales_salida.txt", ios::out | ios::trunc);
+    string linea;
+    if (archivo.is_open()) {
+        archivo << retornarTodasLasTerminales();
+        archivo << endl;
+    }
+    archivo.close();
 }
 

@@ -3,6 +3,7 @@
 
 void menu(){
     int opcion=0;
+    system("clear");
     do{
         cout<<"Manejo de Archivos en C++"<<endl;
         cout<<"1. Dar alta una terminal."<<endl;
@@ -27,10 +28,12 @@ void menu(){
                 mostrarTerminalesHash();
                 break;
             case 5:
-                mostrarTerminalesCompletas();
+                //mostrarTerminalesCompletas();
+                retornarTodasLasTerminales();
                 break;
             case 6:
                 cout<<"Programa Finalizado"<<endl;
+                escribirTxt();
                 break;
             default:
                 cout<<"¡Opcion Incorrecta!"<<endl;
@@ -50,6 +53,6 @@ int main(){
 // COMENTARIOS EXTRAS:
 // 1- SE DEBERIA BORRA LOS OBJETOS EN LAS VARIABLES..........
 // 2- SE DEBERIA HACER UN CONTRO DE QUE NO AGREGUE DUPLICADOS POR LA FUNCION leerTxt()....
-// 3- SE DEBERIA PODER HACER QUE UNA VEZ QUE FINALICE EL PROGRAMA, ANTES DEBA CARGAR TODO LO QUE TIENE EN EL 
+// 3- SE DEBERIA PODER HACER QUE UNA VEZ QUE FINALICE EL PROGRAMA, ANTES DEBA CARGAR TODO LO QUE TIENE EN EL ARCHIVO DE TEXTO.
 // VECTOR TERMINALES EN UN NUEVO TXT Y QUE PISE EL VIEJO TXT TERMINALES, POR ENDE QUEDARIA ORDENADO. PARA UTILIZARLO
 // EN VIAJES......

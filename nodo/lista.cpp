@@ -1,5 +1,5 @@
 #include "lista.h"
-
+using namespace std;
 
 Lista::Lista() {
     primero = 0;
@@ -78,7 +78,37 @@ void Lista::mostrar(){
     cout << "]" <<endl;
 }
 
+void Lista::mostrarTodo(){
+    if (!vacia()) {
+        for (int i=1; i<largo+1; i++) {
+            cout << this->consulta(i).clave<<" ";
+            cout << this->consulta(i).nombre<<" ";
+            cout << this->consulta(i).ciudad<<" ";
+            cout << this->consulta(i).pais<<" ";
+            cout << this->consulta(i).superficie<<" ";
+            cout << this->consulta(i).cantidad_terminales<<" ";
+            cout << this->consulta(i).destinos_nacionales<<" ";
+            cout << this->consulta(i).destinos_internacionales<<" ";
+            cout << " " <<endl;
+        }
+    }
+}
 
-
-
+string Lista::retornaTodo(){
+    string lista = "";
+    if (!vacia()) {
+        for (int i=1; i<largo+1; i++) {
+            lista = lista + this->consulta(i).clave + " ";
+            lista = lista + this->consulta(i).nombre + " ";
+            lista = lista + this->consulta(i).ciudad + " ";
+            lista = lista + this->consulta(i).pais + " ";
+            lista = lista + std::to_string(this->consulta(i).superficie) + " ";
+            lista = lista + std::to_string(this->consulta(i).cantidad_terminales) + " ";
+            lista = lista + std::to_string(this->consulta(i).destinos_nacionales) + " ";
+            lista = lista + std::to_string(this->consulta(i).destinos_internacionales) + " ";
+            lista = lista + "\r\n"; 
+        }
+    }
+    return lista;
+}
 
