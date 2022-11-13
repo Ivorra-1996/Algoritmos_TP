@@ -17,7 +17,7 @@ void menu(){
                 altas();
                 break;
             case 2:
-                //bajas();
+                bajas();
                 break;
             case 3:
                 //leerArchivo();
