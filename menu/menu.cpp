@@ -8,9 +8,10 @@ void menu(){
         cout<<"1. Dar alta una terminal."<<endl;
         cout<<"2. Dar de baja una terminal."<<endl;
         cout<<"3. Consultar una terminal."<<endl;
-        cout<<"4. Consultar todas las terminales."<<endl;
-        cout<<"5. Salir."<<endl;
-        cout<<"Que deseas hacer?.";
+        cout<<"4. Distribucion tabla hash de terminales."<<endl;
+        cout<<"5. Consultar todas las terminales y sus datos."<<endl;
+        cout<<"6. Salir."<<endl;
+        cout<<"Que deseas hacer?: ";
         cin>>opcion;
         switch(opcion){
             case 1:
@@ -23,15 +24,18 @@ void menu(){
                 consultarTerminal();
                 break;
             case 4:
-                mostrarTerminales();
+                mostrarTerminalesHash();
                 break;
             case 5:
+                mostrarTerminalesCompletas();
+                break;
+            case 6:
                 cout<<"Programa Finalizado"<<endl;
                 break;
             default:
                 cout<<"¡Opcion Incorrecta!"<<endl;
         }
-    }while(opcion!=5);
+    }while(opcion!=6);
 }//Fin funcion menu
 
 
