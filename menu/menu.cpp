@@ -36,19 +36,12 @@ void menu(){
 
 
 int main(){
-    //Estaba probando por eso agregue esto aca.......;
     leerTxt();
-    //aca iria un ordena la lista.
-    mostrarTerminales();
-
-    
     menu();
     return 0;
     system("PAUSE");
-}
+};
 
-
-// Problemas con los espacios a la hora de ingresar las terminales por alta.
 
 // el programa cuando inicia, tiene que leer el archivo y carga todos los datos en la tabla terminales, 
 // despues cuando se hace el alta, debe verificar que no este alguno duplicado en la tabla, 
