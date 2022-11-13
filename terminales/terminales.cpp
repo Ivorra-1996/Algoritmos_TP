@@ -47,6 +47,7 @@ Terminal crearTerminal(string clave,string nombre,string ciudad,string pais,floa
 
 
 void altas(){
+    string opcion;
     bool repetido = false;
     cout<<"Ingrese la clave de la terminal:";
     cin>>auxClave;
@@ -76,25 +77,12 @@ void altas(){
         cin>>destinos_nacionales;
         cout<<"Ingresa la destinos internacionales: ";
         cin>>destinos_internacionales;
-        /*
-        //Agrega los atributos a la terminal objeto.
-        terminal.clave = auxClave;
-        terminal.nombre = nombre;
-        terminal.ciudad = ciudad;
-        terminal.pais = pais;
-        terminal.superficie = superficie;
-        terminal.cantidad_terminales = cantidad_terminales;
-        terminal.destinos_nacionales = destinos_nacionales;
-        terminal.destinos_internacionales = destinos_internacionales;
-        //lo pushea a la lista.
-        */
         terminal = crearTerminal(auxClave,nombre,ciudad,pais,superficie,cantidad_terminales,destinos_nacionales
         ,destinos_internacionales);
         terminales[indice].alta(terminal,1);
     }
 }
 //Fin funcion altas de terminales......
-
 
 
 void bajas(){
@@ -104,22 +92,25 @@ void bajas(){
     for(int i = 0 ; i < terminales[index].obtener_largo();i++){
         if (terminales[index].consulta(i+1).clave == auxClave)
         {
+            cout<<endl;
             cout<<"Terminal eliminada"<<endl;
-            //Se elimina el elemento por posicion;
+            cout<<endl;
             terminales[index].baja(i+1);
-            //terminales.erase(terminales.begin() + i);
-            break;
+            return;
         }
     }
+    cout<<"----------------------------------------------"<<endl;
+    cout<<"Terminal no encontrada en la base datos"<<endl;
+    cout<<"------------------------------------------"<<endl;
 }
 
 
 void consultarTerminal(){
-    Terminal* terminal;
     cout<<"Ingresar clave de terminal a consultar:";
     cin>>auxClave;
     int index = obtenerIndice(auxClave);
-    for (int i = 0; i < (terminales[index].obtener_largo()); i++){
+    for (int i = 0; i < (terminales[index].obtener_largo()); i++)
+    {
         if (terminales[index].consulta(i+1).clave == auxClave){
             Terminal terminal = terminales[index].consulta(i+1);
             cout<<"--------------------------------------------------"<<endl;
@@ -142,14 +133,12 @@ void consultarTerminal(){
             cout<<terminal.destinos_internacionales<<endl;
             cout<<"--------------------------------------------------"<<endl;
             return;
-            
         }
     }
     cout<<"----------------------------------------------"<<endl;
     cout<<"Terminal no encontrada en la base datos"<<endl;
     cout<<"------------------------------------------"<<endl;
-    delete terminal ;
-}
+};
 
 
 void mostrarTerminales(){
@@ -181,11 +170,6 @@ void leerTxt(){
 
             }
             lectura.close();
-            for (int i = 0; i < terminales.size(); i++)
-            {
-                cout<<"Posicion :"<< i <<endl;
-                terminales[i].mostrar();
-            }
         }
         else
         {

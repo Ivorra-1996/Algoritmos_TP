@@ -14,12 +14,10 @@ void Lista::alta(Terminal t, int pos) {
     Nodo* nuevo = new Nodo(t);
 
     if (pos == 1) {
-        cout<<"IF"<<endl;
         nuevo -> cambiar_siguiente(primero);
         primero = nuevo;
     } 
     else {
-        cout<<"ELse"<<endl;
         Nodo* anterior = obtener_nodo(pos-1);
         Nodo* siguiente = anterior->obtener_siguiente();
         nuevo->cambiar_siguiente(siguiente);
