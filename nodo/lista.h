@@ -38,10 +38,7 @@ public:
     void mostrar();
 
     void insertarProductos();
-
-
-
-private:
+    
     Nodo* obtener_nodo(int pos);
 };
 

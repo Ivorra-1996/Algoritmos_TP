@@ -5,7 +5,8 @@
 #include<vector>
 #include<sstream>
 #include"../nodo/nodo.h"
-#include "..\nodo\lista.cpp"
+#include"..\nodo\lista.cpp"
+#include"..\nodo\nodo_clase.cpp"
 using namespace std;
 
 //Variables Globales
@@ -37,14 +38,15 @@ void funcionHash(std::string clave, Terminal terminal){
 }*/
 
 
-
+//NO printea repetidos......
 void altas(){
     bool repetido = false;
-    cout<<"Ingre la clave de la terminal:";
+    cout<<"Ingrese la clave de la terminal:";
     cin>>auxClave;
     int indice = obtenerIndice(auxClave);//hash
-    for (int i = 0; i < terminales[indice].obtener_largo(); i++){
-        if (terminales[i].consulta(i).clave == auxClave){
+    Lista lista = terminales[indice]; // Me posicion en la fila del vector.
+    for (int i = 0; i < (lista.obtener_largo()+1); i++){
+        if (lista.consulta(i).clave == auxClave){
             cout<<endl;
             cout<<"Ya existe una terminal con ese codigo en la tabla hash"<<endl;
             cout<<endl;
@@ -79,28 +81,32 @@ void altas(){
         terminal.destinos_nacionales = destinos_nacionales;
         terminal.destinos_internacionales = destinos_internacionales;
         //lo pushea a la lista.
-        
         terminales[indice].alta(terminal,1);
-
     }
 }
 //Fin funcion altas de terminales......
+
+
 /*
 void bajas(){
     
     cout<<"Ingresa la clave de la terminal a eliminar:";
     cin>>auxClave;
-    for(int i = 0 ; i <terminales.size();i++){
-        if (terminales[i].clave == auxClave)
+    int index = obtenerIndice(auxClave);
+    Lista lista = terminales[index];
+    for(int i = 0 ; i < lista.obtener_largo();i++){
+        if (lista.consulta(i).clave == auxClave)
         {
             cout<<"Terminal eliminada"<<endl;
             //Se elimina el elemento por posicion;
-            terminales.erase(terminales.begin() + i);
-            return;
+            lista.baja(i);
+            //terminales.erase(terminales.begin() + i);
+            break;
         }
     }
 }
-
+*/
+/*
 void consultarTerminal(){
     cout<<"Ingresar clave de terminal a consultar:";
     cin>>auxClave;
@@ -132,20 +138,18 @@ void consultarTerminal(){
     cout<<"Terminal no encontrada en la base datos"<<endl;
     cout<<"------------------------------------------"<<endl;
 }
-
-void cantidadeDeTerminales(){
-    int cant = 0;
-    for (int i = 0; i < terminales.size(); i++){
-        cout<<"Nombre: ";
-        cout<<terminales[i].nombre<<endl;
-        cant +=1;
+*/
+void mostrarTerminales(){
+    for (int i = 0; i < terminales.size(); i++)
+    {
+        cout<<"Posicion ->"<<i<<" ";
+        terminales[i].mostrar();
     }
-    cout<<"Cantidad de terminales:";
-    cout<<cant<<endl;
+
 }
 
-*/
-/*
+
+
 void leerTxt(){
     ifstream lectura;
     lectura.open("terminales.txt",ios::out|ios::in);
@@ -185,4 +189,4 @@ void leerTxt(){
             cout << "No se pudo abrir el archivo terminales.txt" << endl;
         }    
 }
-*/
+

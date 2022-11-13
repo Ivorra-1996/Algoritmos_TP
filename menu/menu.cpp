@@ -37,10 +37,13 @@ void menu(){
 
 
 int main(){
-    //ordenarLista();
+    //Estaba probando por eso agregue esto aca.......;
     leerTxt();
-    menu();
     //aca iria un ordena la lista.
+    mostrarTerminales();
+
+    
+    menu();
     return 0;
     system("PAUSE");
 }
