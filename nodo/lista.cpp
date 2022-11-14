@@ -1,4 +1,5 @@
 #include "lista.h"
+#include <iomanip>
 using namespace std;
 
 Lista::Lista() {
@@ -96,16 +97,19 @@ void Lista::mostrarTodo(){
 
 string Lista::retornaTodo(){
     string lista = "";
+    stringstream ss;
     if (!vacia()) {
         for (int i=1; i<largo+1; i++) {
             lista = lista + this->consulta(i).clave + " ";
             lista = lista + this->consulta(i).nombre + " ";
             lista = lista + this->consulta(i).ciudad + " ";
             lista = lista + this->consulta(i).pais + " ";
-            lista = lista + std::to_string(this->consulta(i).superficie) + " ";
+            ss << fixed<<setprecision(2)<<this->consulta(i).superficie;
+            lista = lista + ss.str() + " ";
+            ss.str("");
             lista = lista + std::to_string(this->consulta(i).cantidad_terminales) + " ";
             lista = lista + std::to_string(this->consulta(i).destinos_nacionales) + " ";
-            lista = lista + std::to_string(this->consulta(i).destinos_internacionales) + " ";
+            lista = lista + std::to_string(this->consulta(i).destinos_internacionales);
             lista = lista + "\r\n"; 
         }
     }

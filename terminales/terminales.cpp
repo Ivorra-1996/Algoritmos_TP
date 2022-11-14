@@ -195,12 +195,10 @@ void leerTxt(){
 
 void escribirTxt(){
     ofstream archivo;
-    //archivo.open("terminales_salida.txt", ios::out|ios::in);
-    archivo.open("terminales_salida.txt", ios::out | ios::trunc);
+    archivo.open("terminales.txt", ios::out | ios::trunc);
     string linea;
     if (archivo.is_open()) {
         archivo << retornarTodasLasTerminales();
-        archivo << endl;
     }
     archivo.close();
 }
