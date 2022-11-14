@@ -76,20 +76,20 @@ class Matrix {
       InsertarNodo(nodoOrigen);
     }
 
-    //insert edge
+    //inserta aristas
     int nodoOrigenIndice = SearchNode(nodoOrigen) - listaNodo.begin();
     int nodoDestinoIndice = SearchNode(nodoDestino) - listaNodo.begin();
     matrizAdjunta[nodoOrigenIndice][nodoDestinoIndice] = distancia;
   }
 
   void BorrarArista(string nodoOrigen, string nodoDestino){
-    // is the frin bide un the graph?
+    
     auto fromNodeIt = SearchNode(nodoOrigen);
     if (fromNodeIt != listaNodo.end()) {
-      //is the ti nide un the graph?
+    
       auto nodoDestinoIt = SearchNode(nodoDestino);
       if (nodoDestinoIt != listaNodo.end()) {
-        //remove the path/edge
+       
         int nodoOrigenIndice = SearchNode(nodoOrigen) - listaNodo.begin();
         int nodoDestinoIndice = SearchNode(nodoDestino) - listaNodo.begin();
         matrizAdjunta[nodoOrigenIndice][nodoDestinoIndice] = INFINITO;
@@ -98,10 +98,10 @@ class Matrix {
   }
 
   bool BuscarArista(string nodoOrigen, string nodoDestino) {
-    // is the from node in the graph?
+
      auto fromNodeIt = SearchNode(nodoOrigen);
       if (fromNodeIt != listaNodo.end()) {
-        //is the ti nide un the graph?
+      
         auto nodoDestinoIt = SearchNode(nodoDestino);
         if (nodoDestinoIt != listaNodo.end()) {
           int nodoOrigenIndice = SearchNode(nodoOrigen) - listaNodo.begin();
@@ -116,19 +116,19 @@ class Matrix {
     size_t numNodes = listaNodo.size();
     int largoCampo = 5;
 
-    //print col labels on top line
+    //imprime el titulo de las columnas 
     cout << setw(largoCampo) << " ";
     for (size_t col = 0; col < numNodes; ++col) {
       cout << setw(largoCampo) << listaNodo[col];
     }
     cout << endl;
 
-    // print the adj matrix with a label before each fila
+    // imprime la matriz adujunta
     for (size_t fila = 0; fila < numNodes; ++fila) {
-      //print fila label
+      //imprime el nombre de la fila
       cout << setw(largoCampo) << listaNodo[fila];
 
-      // print each fila - one column at time
+      // imprime cada fila y columna
       for (size_t col = 0; col < numNodes; ++col) {
         cout << setw(largoCampo) << matrizAdjunta[fila][col];
       }
