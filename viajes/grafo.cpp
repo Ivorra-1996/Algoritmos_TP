@@ -5,18 +5,19 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#define INFINITO 9999
 
 using namespace std;
 
 class Matrix {
   public:
-  vector<string> listaNodo; //list of labels or node names in graph
-  vector<vector<int> > matrizAdjunta; //adj matrix for directed graph rows will be from, 
+  vector<string> listaNodo;
+  vector<vector<int> > matrizAdjunta; 
 
-  //redimenciona la matriz de adyasencia y copia en los valores anteiores
+  //redimensiona la matriz de adyasencia y copia en los valores anteiores
   void  Redimensionar(size_t nuevoLargo){
     vector<vector<int> > matrizAnterior = matrizAdjunta;
-    matrizAdjunta = vector<vector<int> >(nuevoLargo, vector<int>(nuevoLargo, 0));
+    matrizAdjunta = vector<vector<int> >(nuevoLargo, vector<int>(nuevoLargo, INFINITO));
 
     for (size_t fila = 0; fila < min(nuevoLargo, matrizAnterior.size()); ++fila) {
       for (size_t col = 0; col < min(nuevoLargo, matrizAnterior[fila].size()); ++col) {
@@ -42,14 +43,14 @@ class Matrix {
       // buscar el indice de este nombre en la lista de nodos
       int index = it - listaNodo.begin();
 
-      // remove all columns at index in adj matrix
+      // remueve todas las columans de la matriz adjunta
       for (auto& fila : matrizAdjunta) {
         fila.erase(fila.begin() + index);
       }
-      // remove the fila at index in adj matrix
+      // remueve todas las filas de la matriz 
       matrizAdjunta.erase(matrizAdjunta.begin() + index);
 
-      // remove the label from label list
+      // remueve las etiquetas de la lista de nodos
       listaNodo.erase(it);
 
     }else{
@@ -61,9 +62,9 @@ class Matrix {
     return find(listaNodo.begin(), listaNodo.end(), nombre);
   }
 
-  void InsertarArista(string nodoOrigen, string nodoDestino) {
-    // both the from and to nodes must be in the graph
-    //so insert if necessary
+  void InsertarArista(string nodoOrigen, string nodoDestino, int distancia) {
+    // se fija que ambos nodos esten en la matriz y agrega la distancia
+    //si no llega, la distancia es infinito
 
     auto nodoDestinoIt = SearchNode(nodoDestino);
     if (nodoDestinoIt == listaNodo.end()){
@@ -78,7 +79,7 @@ class Matrix {
     //insert edge
     int nodoOrigenIndice = SearchNode(nodoOrigen) - listaNodo.begin();
     int nodoDestinoIndice = SearchNode(nodoDestino) - listaNodo.begin();
-    matrizAdjunta[nodoOrigenIndice][nodoDestinoIndice] = 1;
+    matrizAdjunta[nodoOrigenIndice][nodoDestinoIndice] = distancia;
   }
 
   void BorrarArista(string nodoOrigen, string nodoDestino){
@@ -91,7 +92,7 @@ class Matrix {
         //remove the path/edge
         int nodoOrigenIndice = SearchNode(nodoOrigen) - listaNodo.begin();
         int nodoDestinoIndice = SearchNode(nodoDestino) - listaNodo.begin();
-        matrizAdjunta[nodoOrigenIndice][nodoDestinoIndice] = 0;
+        matrizAdjunta[nodoOrigenIndice][nodoDestinoIndice] = INFINITO;
       }
     }
   }
@@ -105,7 +106,7 @@ class Matrix {
         if (nodoDestinoIt != listaNodo.end()) {
           int nodoOrigenIndice = SearchNode(nodoOrigen) - listaNodo.begin();
           int nodoDestinoIndice = SearchNode(nodoDestino) - listaNodo.begin();
-          return matrizAdjunta[nodoOrigenIndice][nodoDestinoIndice] == 1;
+          return matrizAdjunta[nodoOrigenIndice][nodoDestinoIndice] != INFINITO;
         }
       }
       return false;
@@ -139,14 +140,14 @@ class Matrix {
 
 int main(){
   Matrix graph;
-  graph.InsertarArista("USH", "SAL");
-  graph.InsertarArista("SAL", "ROS");
-  graph.InsertarArista("ROS", "ERT");
-  graph.InsertarArista("MDP", "ERT");
-  graph.InsertarArista("ERT", "MDZ");
-  graph.InsertarArista("MDZ", "RET");
-  graph.InsertarArista("RET", "ROS");
-  graph.InsertarArista("TUC", "MDP");
-  graph.InsertarArista("COR", "TUC");
+  graph.InsertarArista("USH", "SAL",5403);
+  graph.InsertarArista("SAL", "ROS",632 );
+  graph.InsertarArista("ROS", "ERT",9843);
+  graph.InsertarArista("MDP", "ERT",912 );
+  graph.InsertarArista("ERT", "MDZ",311 );
+  graph.InsertarArista("MDZ", "RET",1082);
+  graph.InsertarArista("RET", "ROS",1987);
+  graph.InsertarArista("TUC", "MDP",382 );
+  graph.InsertarArista("COR", "TUC",111 );
   graph.Imprimir();
 }
