@@ -17,7 +17,7 @@ class Matrix {
   //redimensiona la matriz de adyasencia y copia en los valores anteiores
   void  Redimensionar(size_t nuevoLargo){
     vector<vector<int> > matrizAnterior = matrizAdjunta;
-    matrizAdjunta = vector<vector<int> >(nuevoLargo, vector<int>(nuevoLargo, INFINITO));
+    matrizAdjunta = vector<vector<int> >(nuevoLargo, vector<int>(nuevoLargo, 0));
 
     for (size_t fila = 0; fila < min(nuevoLargo, matrizAnterior.size()); ++fila) {
       for (size_t col = 0; col < min(nuevoLargo, matrizAnterior[fila].size()); ++col) {
@@ -71,8 +71,8 @@ class Matrix {
       InsertarNodo(nodoDestino);
     }
 
-    auto fromNodeIt = SearchNode(nodoOrigen);
-    if (fromNodeIt == listaNodo.end()){
+    auto nodoOrigenIt = SearchNode(nodoOrigen);
+    if (nodoOrigenIt == listaNodo.end()){
       InsertarNodo(nodoOrigen);
     }
 
@@ -84,8 +84,8 @@ class Matrix {
 
   void BorrarArista(string nodoOrigen, string nodoDestino){
     
-    auto fromNodeIt = SearchNode(nodoOrigen);
-    if (fromNodeIt != listaNodo.end()) {
+    auto nodoOrigenIt = SearchNode(nodoOrigen);
+    if (nodoOrigenIt != listaNodo.end()) {
     
       auto nodoDestinoIt = SearchNode(nodoDestino);
       if (nodoDestinoIt != listaNodo.end()) {
@@ -99,8 +99,8 @@ class Matrix {
 
   bool BuscarArista(string nodoOrigen, string nodoDestino) {
 
-     auto fromNodeIt = SearchNode(nodoOrigen);
-      if (fromNodeIt != listaNodo.end()) {
+     auto nodoOrigenIt = SearchNode(nodoOrigen);
+      if (nodoOrigenIt != listaNodo.end()) {
       
         auto nodoDestinoIt = SearchNode(nodoDestino);
         if (nodoDestinoIt != listaNodo.end()) {
