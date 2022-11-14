@@ -3,7 +3,8 @@
 
 void menu(){
     int opcion=0;
-    system("clear");
+    system("clear"); //PARA USAR EN MAC
+    //system("CRL"); //CAMBIAR PARA USAR EN WINDOWS
     do{
         cout<<"Manejo de Archivos en C++"<<endl;
         cout<<"1. Dar alta una terminal."<<endl;
@@ -28,11 +29,10 @@ void menu(){
                 mostrarTerminalesHash();
                 break;
             case 5:
-                //mostrarTerminalesCompletas();
-                retornarTodasLasTerminales();
+                mostrarTerminalesCompletas();
                 break;
             case 6:
-                cout<<"Programa Finalizado"<<endl;
+                cout<<"Programa Finalizado. Se guardan las modificaciones"<<endl;
                 escribirTxt();
                 break;
             default:
