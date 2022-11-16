@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include<iostream>
+#include<fstream>
 #define INF 99999
 
 using namespace std;
@@ -10,8 +12,8 @@ using namespace std;
 class Matrix {
   public:
   vector<string> listaNodo;
-  vector<vector<float> > matrizAdjuntaValor;
-  vector<vector<int> > matrizAdjuntaDist;   
+  vector<vector<float> > matrizAdjuntaTiempo;
+  vector<vector<int> > matrizAdjuntaCosto;   
 
   vector<string>::iterator SearchNode(string nombre) {
     return find(listaNodo.begin(), listaNodo.end(), nombre);
@@ -19,21 +21,21 @@ class Matrix {
 
   //redimensiona la matriz de adyasencia y copia en los valores anteiores
   void  Redimensionar(size_t nuevoLargo){
-    vector<vector<int> > matrizAnterior = matrizAdjuntaDist;
-    vector<vector<float> > matrizAnteriorValor = matrizAdjuntaValor;
+    vector<vector<int> > matrizAnterior = matrizAdjuntaCosto;
+    vector<vector<float> > matrizAnteriorValor = matrizAdjuntaTiempo;
     
-    matrizAdjuntaDist = vector<vector<int> >(nuevoLargo, vector<int>(nuevoLargo, INF));
-    matrizAdjuntaValor = vector<vector<float> >(nuevoLargo, vector<float>(nuevoLargo, 0));
+    matrizAdjuntaCosto = vector<vector<int> >(nuevoLargo, vector<int>(nuevoLargo, INF));
+    matrizAdjuntaTiempo = vector<vector<float> >(nuevoLargo, vector<float>(nuevoLargo, 0));
 
     for (size_t fila = 0; fila < min(nuevoLargo, matrizAnterior.size()); ++fila) {
       for (size_t col = 0; col < min(nuevoLargo, matrizAnterior[fila].size()); ++col) {
-        matrizAdjuntaDist[fila][col] = matrizAnterior[fila][col];
+        matrizAdjuntaCosto[fila][col] = matrizAnterior[fila][col];
       }
     }
 
     for (size_t fila = 0; fila < min(nuevoLargo, matrizAnteriorValor.size()); ++fila) {
       for (size_t col = 0; col < min(nuevoLargo, matrizAnteriorValor[fila].size()); ++col) {
-        matrizAdjuntaValor[fila][col] = matrizAnteriorValor[fila][col];
+        matrizAdjuntaTiempo[fila][col] = matrizAnteriorValor[fila][col];
       }
     }
   }
@@ -63,8 +65,8 @@ class Matrix {
     //inserta aristas
     int nodoOrigenIndice = SearchNode(nodoOrigen) - listaNodo.begin();
     int nodoDestinoIndice = SearchNode(nodoDestino) - listaNodo.begin();
-    matrizAdjuntaDist[nodoOrigenIndice][nodoDestinoIndice] = distancia;
-    matrizAdjuntaValor[nodoOrigenIndice][nodoDestinoIndice] = valor;
+    matrizAdjuntaCosto[nodoOrigenIndice][nodoDestinoIndice] = distancia;
+    matrizAdjuntaTiempo[nodoOrigenIndice][nodoDestinoIndice] = valor;
   }
 
   int BuscarNodo(string nombreNodo){
@@ -93,14 +95,14 @@ class Matrix {
 
       // imprime cada fila y columna
       for (size_t col = 0; col < numNodes; ++col) {
-        int valor = matrizAdjuntaDist[fila][col];
+        int valor = matrizAdjuntaCosto[fila][col];
         
         if (fila == col) {
           cout << setw(largoCampo) << "0";
         } else if (valor == INF){
           cout << setw(largoCampo) << "x";
         }else {
-          cout << setw(largoCampo) << matrizAdjuntaDist[fila][col];   
+          cout << setw(largoCampo) << matrizAdjuntaCosto[fila][col];   
         }
       }
       cout << endl;
@@ -125,14 +127,14 @@ class Matrix {
 
       // imprime cada fila y columna
       for (size_t col = 0; col < numNodes; ++col) {
-        int valor = matrizAdjuntaValor[fila][col];
+        int valor = matrizAdjuntaTiempo[fila][col];
         
         if (fila == col) {
           cout << setw(largoCampo) << "0";
         } else if (valor == INF){
           cout << setw(largoCampo) << "x";
         }else {
-          cout << setw(largoCampo) << matrizAdjuntaValor[fila][col];   
+          cout << setw(largoCampo) << matrizAdjuntaTiempo[fila][col];   
         }
       }
       cout << endl;
@@ -161,10 +163,10 @@ class Matrix {
     }
   }
 
-  void ImprimirSolucionTiempo(int dist[], int parent[], int src, int destiny) {
+  void ImprimirSolucionTiempo(float dist[], int parent[], int src, int destiny) {
     string srcNode = listaNodo[src];
     string destNode = listaNodo[destiny];
-    int calc = dist[destiny];
+    float calc = dist[destiny];
     string path, parentCity = "";
 
     if (calc != INF && calc != 0 && src != destiny) {
@@ -186,7 +188,20 @@ class Matrix {
   int minimumDist(int dist[], bool sptSet[]) {
     // Initialize min value
     int min = INF, min_index;
-    int numNodes = matrizAdjuntaDist.size();//CAMBIO -1
+    int numNodes = matrizAdjuntaCosto.size();//CAMBIO -1
+
+    for (int v = 0; v < numNodes; v++)
+        if (sptSet[v] == false && dist[v] <= min)
+            min = dist[v], min_index = v;
+            //cout << "min_index: "<< min_index << endl;
+    return min_index;
+  }
+
+   int minimumDistTiempo(float dist[], bool sptSet[]) {
+    // Initialize min value
+    float min = 99999.9;
+    int min_index;
+    int numNodes = matrizAdjuntaCosto.size();//CAMBIO -1
 
     for (int v = 0; v < numNodes; v++)
         if (sptSet[v] == false && dist[v] <= min)
@@ -213,9 +228,9 @@ class Matrix {
 
         for (int v = 0; v < MAX_NODES; v++)
 
-            if (!sptSet[v] && matrizAdjuntaDist[u][v] && dist[u] != INT_MAX && dist[u] + matrizAdjuntaDist[u][v] < dist[v]) {
+            if (!sptSet[v] && matrizAdjuntaCosto[u][v] && dist[u] != INT_MAX && dist[u] + matrizAdjuntaCosto[u][v] < dist[v]) {
   
-                dist[v] = dist[u] + matrizAdjuntaDist[u][v];
+                dist[v] = dist[u] + matrizAdjuntaCosto[u][v];
                 parent[v] = u;            
             }
     }
@@ -225,7 +240,7 @@ class Matrix {
 
   void dijkstraTiempo(int src, int destiny) {
     int MAX_NODES = listaNodo.size();
-    int dist[MAX_NODES]; 
+    float dist[MAX_NODES]; 
     bool sptSet[MAX_NODES]; 
     int parent[MAX_NODES];
 
@@ -236,14 +251,14 @@ class Matrix {
 
     // Find shortest path for all vertices
     for (int count = 0; count < MAX_NODES; count++) {
-        int u = minimumDist(dist, sptSet);
+        int u = minimumDistTiempo(dist, sptSet);
         sptSet[u] = true;
 
         for (int v = 0; v < MAX_NODES; v++)
 
-            if (!sptSet[v] && matrizAdjuntaValor[u][v] && dist[u] != INT_MAX && dist[u] + matrizAdjuntaValor[u][v] < dist[v]) {
+            if (!sptSet[v] && matrizAdjuntaTiempo[u][v] && dist[u] != INT_MAX && dist[u] + matrizAdjuntaTiempo[u][v] < dist[v]) {
   
-                dist[v] = dist[u] + matrizAdjuntaValor[u][v];
+                dist[v] = dist[u] + matrizAdjuntaTiempo[u][v];
                 parent[v] = u;            
             }
     }
@@ -263,6 +278,7 @@ class Matrix {
     dijkstraTiempo(indexSrc, indexDest);
   }
 };
+
 
 int main(){
   Matrix graph;
@@ -293,4 +309,5 @@ int main(){
   graph.BuscarTiempoMinimo("USH", "TUC");
   graph.BuscarTiempoMinimo("USH", "USH");
   graph.BuscarTiempoMinimo("COR", "COR");
+
 }
