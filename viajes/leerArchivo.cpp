@@ -42,35 +42,7 @@ class Archivos{
         }
         else
         {
-            cout << "No se pudo abrir el archivo terminales.txt" << endl;
+            cout << "No se pudo abrir el archivo viajes.txt" << endl;
         }    
   }
 };
-
-
-
-
-/*
-int main(){
-  Archivos archivo;
-  archivo.leerTxt();
-  Matrix graph;
-  
-  for (int i; i < archivo.vectorViajes.size(); i++){
-    string origen = archivo.vectorViajes[i].origen;
-    string destino = archivo.vectorViajes[i].destino;
-    int costo = archivo.vectorViajes[i].costo;
-    float tiempo = archivo.vectorViajes[i].tiempo;
-
-    graph.InsertarArista(origen, destino, costo, tiempo);
-  }
-  
-  graph.ImprimirMatrizCosto();
-  graph.BuscarTiempoMinimo("COR", "TUC");
-  graph.BuscarTiempoMinimo("USH", "SAL");
-  graph.BuscarTiempoMinimo("SAL", "MDZ");
-  graph.BuscarTiempoMinimo("USH", "TUC");
-  graph.BuscarTiempoMinimo("USH", "USH");
-  graph.BuscarTiempoMinimo("COR", "COR");
-}
-*/

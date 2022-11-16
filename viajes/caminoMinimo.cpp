@@ -267,48 +267,20 @@ class Matrix {
   }
 
   void BuscarCostoMinimo(string src, string destiny) {
+    for (int i = 0; i < src.length(); i++) src[i] = toupper(src[i]);
+    for (int i = 0; i < destiny.length(); i++) destiny[i] = toupper(destiny[i]);
+
     int indexSrc = BuscarNodo(src);
     int indexDest = BuscarNodo(destiny);
     dijkstraCosto(indexSrc, indexDest);
   }
 
   void BuscarTiempoMinimo(string src, string destiny) {
+    for (int i = 0; i < src.length(); i++) src[i] = toupper(src[i]);
+    for (int i = 0; i < destiny.length(); i++) destiny[i] = toupper(destiny[i]);
+    
     int indexSrc = BuscarNodo(src);
     int indexDest = BuscarNodo(destiny);
     dijkstraTiempo(indexSrc, indexDest);
   }
 };
-
-/*
-int main(){
-  Matrix graph;
-  graph.InsertarArista("USH", "SAL",5403, 10.1);
-  graph.InsertarArista("SAL", "ROS",632, 24.6 );
-  graph.InsertarArista("ROS", "ERT",843, 1004.5);
-  graph.InsertarArista("MDP", "ERT",912, 6.5 );
-  graph.InsertarArista("ERT", "MDZ",311, 10.0);
-  graph.InsertarArista("MDZ", "RET",1082, 173.54);
-  graph.InsertarArista("RET", "ROS",1987, 66.5);
-  graph.InsertarArista("TUC", "MDP",382, 6.3 );
-  graph.InsertarArista("COR", "TUC",111, 55.8 );
-  graph.InsertarArista("SAL", "MDZ",2110, 5.8 );
-  graph.ImprimirMatrizCosto();
-  cout << "----------------------------------" << endl;
-  graph.BuscarCostoMinimo("COR", "TUC");
-  graph.BuscarCostoMinimo("USH", "SAL");
-  graph.BuscarCostoMinimo("SAL", "MDZ");
-  graph.BuscarCostoMinimo("USH", "TUC");
-  graph.BuscarCostoMinimo("USH", "USH");
-  graph.BuscarCostoMinimo("COR", "COR");
-  cout << "----------------------------------" << endl;
-  graph.ImprimirMatrizTiempo();
-  cout << "----------------------------------" << endl;
-  graph.BuscarTiempoMinimo("COR", "TUC");
-  graph.BuscarTiempoMinimo("USH", "SAL");
-  graph.BuscarTiempoMinimo("SAL", "MDZ");
-  graph.BuscarTiempoMinimo("USH", "TUC");
-  graph.BuscarTiempoMinimo("USH", "USH");
-  graph.BuscarTiempoMinimo("COR", "COR");
-
-}
-*/

@@ -71,10 +71,8 @@ void menuViajes(){
     }while(opcion!=5);
 }//Fin funcion menu
 
-/*
 int main(){
     menuViajes();
     return 0;
     system("PAUSE");
 };
-*/
