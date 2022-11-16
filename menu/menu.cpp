@@ -1,12 +1,13 @@
 #include "../terminales/terminales.cpp"
 
 
-void menu(){
+void menuTerminales(){
     int opcion=0;
     system("clear"); //PARA USAR EN MAC
     //system("CRL"); //CAMBIAR PARA USAR EN WINDOWS
     do{
-        cout<<"Manejo de Archivos en C++"<<endl;
+        cout<<" "<<endl;
+        cout<<"------- Menu terminales -------"<<endl;
         cout<<"1. Dar alta una terminal."<<endl;
         cout<<"2. Dar de baja una terminal."<<endl;
         cout<<"3. Consultar una terminal."<<endl;
@@ -17,18 +18,28 @@ void menu(){
         cin>>opcion;
         switch(opcion){
             case 1:
+                system("clear");
+                cout<<"------- Dar alta una terminal -------"<<endl;     
                 altas();
                 break;
             case 2:
+                system("clear");
+                cout<<"------- Dar de baja una terminal -------"<<endl;     
                 bajas();
                 break;
             case 3:
+                system("clear");
+                cout<<"------- Consultar una terminal -------"<<endl;     
                 consultarTerminal();
                 break;
             case 4:
+                system("clear");
+                cout<<"------- Distribucion tabla hash de terminales -------"<<endl;     
                 mostrarTerminalesHash();
                 break;
             case 5:
+                system("clear");
+                cout<<"------- Consultar todas las terminales y sus datos -------"<<endl;     
                 mostrarTerminalesCompletas();
                 break;
             case 6:
@@ -44,7 +55,8 @@ void menu(){
 
 int main(){
     leerTxt();
-    menu();
+    menuTerminales();
     return 0;
     system("PAUSE");
 };
+

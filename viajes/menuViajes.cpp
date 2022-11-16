@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void menu(){
+void menuViajes(){
 
   Archivos archivo;
   archivo.leerTxt();
@@ -71,9 +71,10 @@ void menu(){
     }while(opcion!=5);
 }//Fin funcion menu
 
-
+/*
 int main(){
-    menu();
+    menuViajes();
     return 0;
     system("PAUSE");
 };
+*/
